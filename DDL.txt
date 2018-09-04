@@ -1,0 +1,37 @@
+CREATE TABLE TRANSAKSI (
+	idTransaksi varchar2(10),
+	idPegawai varchar2(10),
+	noKTP varchar2(10),
+	idStock varchar2(10),
+	jumlah int,
+	tanggal date,
+	CONSTRAINT TRANSAKSI_PK PRIMARY KEY(idTransaksi),
+	CONSTRAINT TRANSAKSI_FK1 FOREIGN KEY(idPegawai) REFERENCES PEGAWAI ON DELETE CASCADE,
+	CONSTRAINT TRANSAKSI_FK2 FOREIGN KEY(noKTP) REFERENCES PELANGGAN ON DELETE CASCADE,
+	CONSTRAINT TRANSAKSI_FK3 FOREIGN KEY(idStock) REFERENCES STOCKKERETA ON DELETE CASCADE,
+);
+
+CREATE TABLE PEGAWAI (
+	idPegawai varchar2(10),
+	namaPegawai varchar2(20),
+	jabatan varchar2(10),
+	CONSTRAINT PEGAWAI_PK PRIMARY KEY(idPegawai)
+);
+
+CREATE TABLE PELANGGAN (
+	noKTP varchar2(10),
+	nama varchar2(20),
+	alamat varchar2(20),
+	CONSTRAINT PELANGGAN_PK PRIMARY KEY(noKTP)
+);
+
+CREATE TABLE STOCKKERETA (
+	idStock varchar2(10),
+	idPegawai varchar2(10),
+	namaKereta varchar2(20),
+	jenisKerea varchar2(10),
+	jumlahKereta int,
+	hargaKereta int,
+	CONSTRAINT STOCKKERETA_PK PRIMARY KEY(idStock),
+	CONSTRAINT TRANSAKSI_FK1 FOREIGN KEY(idPegawai) REFERENCES PEGAWAI ON DELETE CASCADE,
+);
